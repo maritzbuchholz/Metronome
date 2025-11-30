@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Splash&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
-    <link rel="shortcut icon" href="#"> <!-- need an icon here -->
+    <link rel="shortcut icon" href="skull.svg"> <!-- need an icon here -->
     <script src="http://unpkg.com/tone"></script>
     <script src="main.js" defer></script>
     <title>Metalnome</title>
 </head>
 <body>
     <h1 class="metalnome__title">Metalnome</h1>
+    <p class="metalnome__description">A metronome for drummers of the punk,
+        metal, and knuckle-dragging variety</p>
     <section class="metalnome__wrapper">
-        <label class="metalnome__bpm-label" for="bpm">BPM</label>
-        <input class="metalnome__bpm-label" type="number" name="bpm" id="bpm">
+        <img class="metalnome__timer" src="brokenheart.svg" alt="broken heart time keeper">
+        <div class="metalnome__input-wrapper">
+            <label class="metalnome__bpm-label" for="bpm">BPM</label>
+            <input class="metalnome__bpm-label" type="number" name="bpm" id="bpm">
+        </div>
         <button class="metalnome__start">Play</button>
     </section>
 </body>

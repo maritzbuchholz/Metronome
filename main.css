@@ -7,18 +7,20 @@ body {
   margin: 0;
   background-color: black;
   flex-direction: column;
+  color: red;
+  font-family: "Science Gothic", sans-serif;
 }
 
 .metalnome__wrapper {
+  display: flex;
+  flex-direction: column;
   border: red 1px solid;
+  border-radius: 5px;
+  padding: 5rem;
 }
 .metalnome__title {
-  color: red;
-  font-family: "Metal Mania", system-ui;
+  font-family: "Metal Mania", sans-serif;
   font-size: 6rem;
   margin: 0;
   margin-top: -33px;
-}
-.metalnome__bpm-label {
-  color: red;
 }/*# sourceMappingURL=main.css.map */
