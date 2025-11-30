@@ -1,25 +1,34 @@
 "use strict"
 
 const start = document.querySelector(".metalnome__start");
+
+
+// this function creates the visual time-keeper of a broken heart </3
+//
 const blinker = document.querySelector(".metalnome__blinker");
 let lastStamp = 0;
 let running = true;
 
-// this function creates the visual time-keeper of a broken heart </3
 function startBlinker (time) {
-    const interval = Tone.Time("16n").toSeconds() * 1000; //converts time signature to milliseconds
+    // const interval = Tone.Time("16n").toSeconds() * 1000; //converts time signature to milliseconds
+    const interval = 100;
     function animation (time) {
         if (time - lastStamp >= interval && running) {
             blinker.style.visibility =
                 blinker.style.visibility === "hidden" ? "visible" : "hidden"; //flips blinker from visible to hidden
             lastStamp = time;
         }
-        const blinkerID = requestAnimationFrame(animation); //pass the function but do not call it
+        requestAnimationFrame(animation); //pass the function but do not call it
     }
-    const blinkerID = requestAnimationFrame(animation); //need to call twice to get it to blink
+    requestAnimationFrame(animation); //need to call twice to get it to blink
 }
 
+function stopBlinker(){
+    running = false;
+    blinker.style.visibility = "hidden";
+}
 
+//////////////////////////////////
 
 function basicStart () {
     const bpm = document.getElementById("bpm");
@@ -35,8 +44,7 @@ function basicStart () {
 }
 
 function stop() {
-    running = false;
-    blinker.style.visibility = "hidden";
+    stopBlinker();
     Tone.Transport.stop();
     Tone.Transport.cancel(); // Clears all scheduled events
 }
