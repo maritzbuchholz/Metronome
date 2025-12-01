@@ -1,3 +1,5 @@
+$trasition-time: 1s;
+
 @keyframes flash {
   to {
     opacity: 0;
@@ -6,6 +8,7 @@
     opacity: 1;
   }
 }
+
 
 body{
     display: flex;
@@ -36,8 +39,8 @@ body{
     }
     &__blinker{
         opacity: 0;
-        &:hover{
-            animation: flash 1s alternate ease-out;
+        &--on{
+            animation: flash $trasition-time alternate ease-out;
         }
     }
 }

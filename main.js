@@ -5,28 +5,20 @@ const start = document.querySelector(".metalnome__start");
 
 // this function creates the visual time-keeper of a broken heart </3
 //
-const blinker = document.querySelector(".metalnome__blinker");
+
 let lastStamp = 0;
 let running = true;
 
-function startBlinker (time) {
-    // const interval = Tone.Time("16n").toSeconds() * 1000; //converts time signature to milliseconds
-    const interval = 100;
-    function animation (time) {
-        if (time - lastStamp >= interval && running) {
-            blinker.style.visibility =
-                blinker.style.visibility === "hidden" ? "visible" : "hidden"; //flips blinker from visible to hidden
-            lastStamp = time;
-        }
-        requestAnimationFrame(animation); //pass the function but do not call it
-    }
-    requestAnimationFrame(animation); //need to call twice to get it to blink
+function blinkOn() {
+    const blinker = document.querySelector(".metalnome__blinker");
+    blinker.classList.add("metalnome__blinker--on");
 }
 
-function stopBlinker(){
-    running = false;
-    blinker.style.visibility = "hidden";
+function blinkOff() {
+    const blinker = document.querySelector(".metalnome__blinker");
+    blinker.classList.remove("metalnome__blinker--on");
 }
+
 
 //////////////////////////////////
 
@@ -37,14 +29,18 @@ function basicStart () {
     const metroLoop = new Tone.Loop(
         (time) => {
             synth.triggerAttackRelease("G#4", "16n", time);
-            Tone.Draw.schedule(startBlinker, time);
+            Tone.Draw.schedule(blinkOn, time);
         },"8n"
     ).start(0);
+    const metroLoop2 = new Tone.Loop(
+        (time) => {
+            Tone.Draw.schedule(blinkOff, time);
+        },"8n"
+    ).start("16n");
     Tone.Transport.start();
 }
 
 function stop() {
-    stopBlinker();
     Tone.Transport.stop();
     Tone.Transport.cancel(); // Clears all scheduled events
 }
