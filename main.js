@@ -4,10 +4,7 @@ const start = document.querySelector(".metalnome__start");
 
 
 // this function creates the visual time-keeper of a broken heart </3
-//
 
-let lastStamp = 0;
-let running = true;
 
 function blinkOn() {
     const blinker = document.querySelector(".metalnome__blinker");
@@ -51,7 +48,6 @@ start.addEventListener("click", async (event) => {
     event.preventDefault();
     metalnomeOn = !metalnomeOn;
     if (metalnomeOn){
-        running = true;
         await Tone.start();
         basicStart();
     } else {

@@ -36,5 +36,5 @@ body {
   opacity: 0;
 }
 .metalnome__blinker--on {
-  animation: flash 1s alternate ease-out;
+  animation: flash 2s alternate ease-out;
 }/*# sourceMappingURL=main.css.map */
