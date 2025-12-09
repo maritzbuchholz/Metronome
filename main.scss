@@ -9,38 +9,49 @@ $trasition-time: 2s;
   }
 }
 
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    background-color: black;
-    flex-direction: column;
-    color: red;
-    font-family: "Science Gothic", sans-serif;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-color: black;
+  flex-direction: column;
+  color: red;
+  font-family: "Science Gothic", sans-serif;
 }
 
-.metalnome{
-    &__wrapper{
+.metalnome {
+  &__wrapper {
     display: flex;
     flex-direction: column;
     border: red 1px solid;
     border-radius: 6px;
     padding: 6rem;
+  }
+  &__blinker-wrapper {
+    width: 333px;
+    height: 333px;
+  }
+  &__title {
+    font-family: "Metal Mania", sans-serif;
+    font-size: 6rem;
+    margin: 0;
+    margin-top: -33px;
+  }
+  &__blinker {
+    position: absolute;
+    width: inherit;
+    height: auto;
+    opacity: 0;
+    &--on {
+      animation: flash $trasition-time alternate ease-out;
     }
-    &__title{
-        font-family: "Metal Mania", sans-serif;
-        font-size: 6rem;
-        margin: 0;
-        margin-top: -33px;
-    }
-    &__blinker{
-        opacity: 0;
-        &--on{
-            animation: flash $trasition-time alternate ease-out;
-        }
-    }
+  }
+  &__blinker--base {
+    position: absolute;
+    width: inherit;
+    height: auto;
+  }
 }

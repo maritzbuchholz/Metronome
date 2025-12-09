@@ -26,6 +26,10 @@ body {
   border-radius: 6px;
   padding: 6rem;
 }
+.metalnome__blinker-wrapper {
+  width: 333px;
+  height: 333px;
+}
 .metalnome__title {
   font-family: "Metal Mania", sans-serif;
   font-size: 6rem;
@@ -33,8 +37,16 @@ body {
   margin-top: -33px;
 }
 .metalnome__blinker {
+  position: absolute;
+  width: inherit;
+  height: auto;
   opacity: 0;
 }
 .metalnome__blinker--on {
   animation: flash 2s alternate ease-out;
+}
+.metalnome__blinker--base {
+  position: absolute;
+  width: inherit;
+  height: auto;
 }/*# sourceMappingURL=main.css.map */
