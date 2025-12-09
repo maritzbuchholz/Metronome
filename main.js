@@ -36,8 +36,21 @@ function basicStart() {
   const metroLoop = new Tone.Loop((time) => {
     synth.triggerAttackRelease("G#4", "16n", time);
   }, "8n").start(0);
-  const metroLoop2 = new Tone.Loop((time) => {}, "8n").start("16n");
+  Tone.Transport.start();
+}
 
+function blastBeat() {
+  const bpm = document.getElementById("bpm");
+  const synth = new Tone.Synth().toDestination();
+  Tone.Transport.bpm.value = bpm.value;
+  const timeKeeperCall = timeKeeper();
+  const seq = new Tone.Sequence(
+    (time, note) => {
+      synth.triggerAttackRelease(note, "16n", time);
+    },
+    ["C4", "G#4"],
+    "16n"
+  ).start(0);
   Tone.Transport.start();
 }
 
@@ -56,7 +69,7 @@ start.addEventListener("click", async (event) => {
   await Tone.start(); //connects to the WebAudio API and enable AudioContext
   metalnomeOn = !metalnomeOn;
   if (metalnomeOn) {
-    basicStart();
+    blastBeat();
   } else {
     stop();
   }

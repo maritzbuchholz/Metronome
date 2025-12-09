@@ -20,9 +20,17 @@
     <section class="metalnome__wrapper">
         <img class="metalnome__blinker" src="./assets/brokenheart.svg" alt="broken heart time keeper">
         <div class="metalnome__input-wrapper">
+            <label class="metalnome__groove-label" for="style">Groove</label>
+            <select class="metalnome__groove-label" type="number" name="groove" id="groove">
+                <option value="apple">Straight Up</option>
+                <option value="banana">Blast Beat</option>
+            </select>
+        </div>
+        <div class="metalnome__input-wrapper">
             <label class="metalnome__bpm-label" for="bpm">BPM</label>
             <input class="metalnome__bpm-label" type="number" name="bpm" id="bpm">
         </div>
+
         <button class="metalnome__start">Play</button>
     </section>
 </body>
