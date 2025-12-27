@@ -11,6 +11,7 @@ const grooveList = {
   slipknot: slipknot,
   breakdown: breakdown,
   windmills: windmills,
+  faceripper: faceripper,
 }
 
 //utilities
@@ -230,6 +231,47 @@ function windmills() {
     ["snare"],
     "1n"
   ).start("2n");
+  Tone.Transport.start();
+}
+
+function faceripper() {
+  const bpm = document.getElementById("bpm");
+  const synth = new Tone.Synth().toDestination();
+  Tone.Transport.bpm.value = bpm.value;
+  const timeKeeperCall = timeKeeper();
+
+  const cymbals = new Tone.Sequence(
+    (time, note) => {
+      players.player(note).start(time);
+    },
+    ["closedhh"],
+    "4n"
+  ).start(0);
+
+  const kick = new Tone.Sequence(
+    (time, note) => {
+      players.player(note).start(time);
+    },
+    ["kick", null, null, "kick", null, null, "kick", null,
+     null, null, "kick", null, null, null, "kick", "kick",
+     "kick", null, null, "kick", null, null, "kick", null,
+     null, null, "kick", "kick", null, null, null, null,
+     "kick", null, null, "kick", null, null, "kick", null,
+     null, null, "kick", null, null, null, "kick", "kick",
+    "kick", null, null, "kick", null, null, "kick", null,
+     "kick", "kick", "kick", "kick", null, null, "kick", null,
+    ],
+    "16n"
+  ).start(0);
+  Tone.Transport.start();
+
+  const snare = new Tone.Sequence(
+    (time, note) => {
+      players.player(note).start(time);
+    },
+    ["snare"],
+    "2n"
+  ).start("4n");
   Tone.Transport.start();
 }
 
