@@ -7,7 +7,19 @@ const blinker = document.querySelector(".metalnome__blinker");
 const grooveList = {
   standard: standard,
   blast: blastBeat,
+  motor: motorhead,
 }
+
+//utilities
+
+function stop() {
+  metalnomeOn = false;
+  Tone.Transport.stop();
+  Tone.Transport.cancel();
+  Tone.Draw.cancel();
+  blinkOff();
+}
+
 
 // this function creates the visual time-keeper of a broken heart </3
 
@@ -43,7 +55,7 @@ const players = new Tone.Players({
 }).toDestination();
 
 
-//////////////////////////////////
+//grooves
 
 function standard() {
   const bpm = document.getElementById("bpm");
@@ -65,6 +77,7 @@ function blastBeat() {
   const synth = new Tone.Synth().toDestination();
   Tone.Transport.bpm.value = bpm.value;
   const timeKeeperCall = timeKeeper();
+
   const cymbals = new Tone.Sequence(
     (time, note) => {
       players.player(note).start(time);
@@ -83,15 +96,42 @@ function blastBeat() {
   Tone.Transport.start();
 }
 
-function stop() {
-  metalnomeOn = false;
-  Tone.Transport.stop();
-  Tone.Transport.cancel();
-  Tone.Draw.cancel();
-  blinkOff();
+function motorhead() {
+  const bpm = document.getElementById("bpm");
+  const synth = new Tone.Synth().toDestination();
+  Tone.Transport.bpm.value = bpm.value;
+  const timeKeeperCall = timeKeeper();
+
+  const cymbals = new Tone.Sequence(
+    (time, note) => {
+      players.player(note).start(time);
+    },
+    ["closedhh"],
+    "8n"
+  ).start(0);
+
+  const kick = new Tone.Sequence(
+    (time, note) => {
+      players.player(note).start(time);
+    },
+    ["kick"],
+    "16n"
+  ).start(0);
+  Tone.Transport.start();
+
+  const snare = new Tone.Sequence(
+    (time, note) => {
+      players.player(note).start(time);
+    },
+    ["snare"],
+    "4n"
+  ).start("8n");
+  Tone.Transport.start();
+
 }
 
-//////
+//////////////////////////////////
+
 
 let metalnomeOn = false;
 start.addEventListener("click", async (event) => {
