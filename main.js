@@ -34,6 +34,13 @@ function timeKeeper() {
 
 // instruments
 
+const players = new Tone.Players({
+    "kick": "./assets/samplers/kick.wav",
+    "snare": "./assets/samplers/snare.wav",
+    "openhh": "./assets/samplers/openhh.wav",
+    "closedhh": "./assets/samplers/closedhh.wav",
+    "crash": "./assets/samplers/crash.wav",
+}).toDestination();
 
 
 //////////////////////////////////
@@ -58,11 +65,19 @@ function blastBeat() {
   const synth = new Tone.Synth().toDestination();
   Tone.Transport.bpm.value = bpm.value;
   const timeKeeperCall = timeKeeper();
-  const seq = new Tone.Sequence(
+  const cymbals = new Tone.Sequence(
     (time, note) => {
-      synth.triggerAttackRelease(note, "16n", time);
+      players.player(note).start(time);
     },
-    ["C4", "G#4"],
+    ["crash", "closedhh", "closedhh", "closedhh", "closedhh", "closedhh", "closedhh", "closedhh"],
+    "8n"
+  ).start(0);
+
+  const drums = new Tone.Sequence(
+    (time, note) => {
+      players.player(note).start(time);
+    },
+    ["kick", "snare"],
     "16n"
   ).start(0);
   Tone.Transport.start();
