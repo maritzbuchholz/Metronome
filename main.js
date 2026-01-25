@@ -15,20 +15,28 @@ if (silentAudio) {
 // 2. NoSleep (Keeps App Awake in Background)
 const noSleep = new NoSleep();
 
-function unlockiOS() {
-  // Trigger Silent Audio
+// 1. PRIME AUDIO ON FIRST TOUCH (Global Unlock)
+function primeAudio() {
+  if (Tone.context.state !== 'running') {
+    Tone.context.resume();
+  }
+  
   if(silentAudio) {
     silentAudio.play().catch(e => console.log("Silent audio failed", e));
   }
   
-  // Trigger NoSleep
-  noSleep.enable();
+  // Only play the silent audio once to unlock the channel
+  // We can leave it looping or pause it, but keeping it playing is safer for silent mode
+  // However, users might not want it running forever if they never click play.
+  // Actually, for silent mode to work, it MUST be playing. 
+  // So we let it run. It's silent.
   
-  // Explicitly resume Tone context if needed
-  if (Tone.context.state !== 'running') {
-    Tone.context.resume();
-  }
+  document.removeEventListener('touchstart', primeAudio);
+  document.removeEventListener('click', primeAudio);
 }
+
+document.addEventListener('touchstart', primeAudio);
+document.addEventListener('click', primeAudio);
 
 // 3. Detect correct event (Touch vs Click)
 const triggerEvent = 'ontouchend' in document ? 'touchend' : 'click';
@@ -312,8 +320,9 @@ start.addEventListener(triggerEvent, (event) => {
   
   // 1. UNLOCK IMMEDIATELY (Synchronous)
   if (!metalnomeOn) {
-      unlockiOS();
-      Tone.start(); // Fire and forget
+      if(silentAudio) silentAudio.play().catch(e => console.log("Audio play failed", e));
+      noSleep.enable();
+      Tone.start(); 
   }
 
   // 2. Proceed without awaiting (Tone.start is handled by unlockiOS resume)
