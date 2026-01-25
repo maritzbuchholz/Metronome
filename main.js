@@ -30,8 +30,8 @@ function primeAudio() {
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: 'Metalnome',
-      artist: 'BrainStation',
-      album: 'Metronome',
+      artist: 'Metalnome',
+      album: 'Metalnome',
       artwork: [
         { src: './assets/skull.png', sizes: '512x512', type: 'image/png' },
       ]
@@ -45,7 +45,7 @@ function primeAudio() {
     });
     navigator.mediaSession.setActionHandler('pause', () => { 
         if(silentAudio) silentAudio.pause();
-        Tone.Transport.stop();
+        stop();
         navigator.mediaSession.playbackState = "paused";
     });
     // Dummy handlers required for iOS lock screen to show the player
