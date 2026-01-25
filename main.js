@@ -13,8 +13,8 @@ if (silentAudio) {
 
 // 1. PRIME AUDIO ON FIRST TOUCH (Global Unlock)
 function primeAudio() {
-  if (Tone.context.state !== 'running') {
-    Tone.context.resume();
+  if (Tone.BaseContext.state !== 'running') {
+    Tone.BaseContext.resume();
   }
   
   if(silentAudio) {
@@ -45,13 +45,9 @@ function primeAudio() {
     });
     navigator.mediaSession.setActionHandler('pause', () => { 
         if(silentAudio) silentAudio.pause();
-        Tone.Transport.pause();
+        Tone.Transport.stop();
         navigator.mediaSession.playbackState = "paused";
     });
-    navigator.mediaSession.setActionHandler('previoustrack', () => {});
-    navigator.mediaSession.setActionHandler('nexttrack', () => {});
-    navigator.mediaSession.setActionHandler('seekbackward', () => {});
-    navigator.mediaSession.setActionHandler('seekforward', () => {});
     navigator.mediaSession.setActionHandler('stop', () => {
         if(silentAudio) {
             silentAudio.pause();
