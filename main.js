@@ -41,10 +41,12 @@ function primeAudio() {
     navigator.mediaSession.setActionHandler('play', () => { 
         if(silentAudio) silentAudio.play();
         Tone.Transport.start(); 
+        navigator.mediaSession.playbackState = "playing";
     });
     navigator.mediaSession.setActionHandler('pause', () => { 
         if(silentAudio) silentAudio.pause();
         Tone.Transport.pause();
+        navigator.mediaSession.playbackState = "paused";
     });
   }
   
@@ -345,7 +347,9 @@ start.addEventListener(triggerEvent, (event) => {
   metalnomeOn = !metalnomeOn;
   if (metalnomeOn) {
     grooveList[selectedGroove]();
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "playing";
   } else {
     stop();
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "paused";
   }
 });
