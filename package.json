@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/maritzbuchholz/Metronome#readme",
   "dependencies": {
+    "nosleep.js": "^0.12.0",
     "tone": "^15.1.22",
     "vite": "^7.3.1"
   }

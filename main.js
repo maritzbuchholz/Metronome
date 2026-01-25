@@ -1,14 +1,19 @@
 "use strict";
 import * as Tone from "tone";
+import NoSleep from "nosleep.js";
 
 const start = document.querySelector(".metalnome__button");
 const blinker = document.querySelector(".metalnome__blinker");
 
-// iOS silence hack
+// 1. Silent Loop (Bypasses Silent Switch)
 const silentAudio = document.getElementById("silent-audio");
 if (silentAudio) {
+  // Use a tiny silent mp3 or wav. This one works well.
   silentAudio.src = "data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA==";
 }
+
+// 2. NoSleep (Keeps App Awake in Background)
+const noSleep = new NoSleep();
 
 
 const grooveList = {
@@ -25,7 +30,10 @@ const grooveList = {
 
 function stop() {
   metalnomeOn = false;
+  // Disable hacks
   if(silentAudio) silentAudio.pause();
+  noSleep.disable();
+  
   Tone.Transport.stop();
   Tone.Transport.cancel();
   Tone.Draw.cancel();
@@ -285,7 +293,10 @@ start.addEventListener("click", async (event) => {
   await Tone.start(); //connects to the WebAudio API and enable AudioContext
   metalnomeOn = !metalnomeOn;
   if (metalnomeOn) {
+    // Enable hacks
     if(silentAudio) silentAudio.play().catch(e => console.log("Audio play failed", e));
+    noSleep.enable();
+
     grooveList[selectedGroove]();
   } else {
     stop();
