@@ -287,13 +287,16 @@ function faceripper() {
 
 
 let metalnomeOn = false;
-// Enable hacks
-if(silentAudio) silentAudio.play().catch(e => console.log("Audio play failed", e));
-noSleep.enable();
-
 start.addEventListener("click", async (event) => {
   event.preventDefault();
   const selectedGroove = document.querySelector(".metalnome__groove").value;
+  
+  if (!metalnomeOn) {
+      // STARTING: Trigger hacks IMMEDIATELY on user gesture
+      if(silentAudio) silentAudio.play().catch(e => console.log("Audio play failed", e));
+      noSleep.enable();
+  }
+
   await Tone.start(); //connects to the WebAudio API and enable AudioContext
   metalnomeOn = !metalnomeOn;
   if (metalnomeOn) {
