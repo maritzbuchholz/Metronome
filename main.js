@@ -30,6 +30,9 @@ function unlockiOS() {
   }
 }
 
+// 3. Detect correct event (Touch vs Click)
+const triggerEvent = 'ontouchend' in document ? 'touchend' : 'click';
+
 
 const grooveList = {
   standard: standard,
@@ -302,8 +305,9 @@ function faceripper() {
 
 
 let metalnomeOn = false;
-start.addEventListener("click", async (event) => {
+start.addEventListener(triggerEvent, async (event) => {
   event.preventDefault();
+  
   const selectedGroove = document.querySelector(".metalnome__groove").value;
   
   // 1. UNLOCK IMMEDIATELY (Synchronous)
