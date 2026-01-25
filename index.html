@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/skull.svg">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Metalnome</title>
+  <script type="module" crossorigin src="./assets/index-BRzvONDc.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CYeMSF60.css">
+</head>
+<body class="metalnome">
+    <h1 class="metalnome__title">Metalnome</h1>
+    <p class="metalnome__description">A metronome for drummers of the punk,
+        metal, and knuckle-dragging variety</p>
+    <section class="metalnome__wrapper">
+        <div class="metalnome__blinker-wrapper">
+            <img class="metalnome__blinker--base" src="./assets/brokenheartgrey.svg" alt="broken heart time keeper">
+            <img class="metalnome__blinker" src="./assets/brokenheart.svg" alt="broken heart time keeper">
+        </div>
+        <div class="metalnome__input-wrapper">
+            <label class="metalnome__groove-label" for="style">Groove</label>
+            <select class="metalnome__groove" type="number" name="groove" id="groove">
+                <option value="standard">Straight Up</option>
+                <option value="blast">BLAST BEAT!</option>
+                <option value="motor">Motorhead</option>
+                <option value="slipknot">Slipknot</option>
+                <option value="breakdown">BREAKDOWN</option>
+                <option value="windmills">WINDMILLS</option>
+                <option value="faceripper">FACERIPPER</option>
+            </select>
+        </div>
+        <div class="metalnome__input-wrapper">
+            <label class="metalnome__bpm-label" for="bpm">BPM</label>
+            <input class="metalnome__bpm" type="number" name="bpm" id="bpm">
+        </div>
+
+        <button class="metalnome__button">Play</button>
+    </section>
+    <audio id="silent-audio" loop hidden></audio> <!-- iOS silence hack -->
+</body>
+</html>
