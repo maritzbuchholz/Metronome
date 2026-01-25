@@ -4,6 +4,12 @@ import * as Tone from "tone";
 const start = document.querySelector(".metalnome__button");
 const blinker = document.querySelector(".metalnome__blinker");
 
+// iOS silence hack
+const silentAudio = document.getElementById("silent-audio");
+if (silentAudio) {
+  silentAudio.src = "data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA==";
+}
+
 
 const grooveList = {
   standard: standard,
@@ -19,6 +25,7 @@ const grooveList = {
 
 function stop() {
   metalnomeOn = false;
+  if(silentAudio) silentAudio.pause();
   Tone.Transport.stop();
   Tone.Transport.cancel();
   Tone.Draw.cancel();
@@ -278,6 +285,7 @@ start.addEventListener("click", async (event) => {
   await Tone.start(); //connects to the WebAudio API and enable AudioContext
   metalnomeOn = !metalnomeOn;
   if (metalnomeOn) {
+    if(silentAudio) silentAudio.play().catch(e => console.log("Audio play failed", e));
     grooveList[selectedGroove]();
   } else {
     stop();
