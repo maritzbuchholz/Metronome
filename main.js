@@ -48,6 +48,11 @@ function primeAudio() {
         Tone.Transport.stop();
         navigator.mediaSession.playbackState = "paused";
     });
+    // Dummy handlers required for iOS lock screen to show the player
+    navigator.mediaSession.setActionHandler('previoustrack', () => {});
+    navigator.mediaSession.setActionHandler('nexttrack', () => {});
+    navigator.mediaSession.setActionHandler('seekbackward', () => {});
+    navigator.mediaSession.setActionHandler('seekforward', () => {});
     navigator.mediaSession.setActionHandler('stop', () => {
         if(silentAudio) {
             silentAudio.pause();
