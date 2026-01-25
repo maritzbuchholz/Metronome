@@ -1,4 +1,5 @@
 "use strict";
+import * as Tone from "tone";
 
 const start = document.querySelector(".metalnome__button");
 const blinker = document.querySelector(".metalnome__blinker");
@@ -106,6 +107,8 @@ function motorhead() {
   const synth = new Tone.Synth().toDestination();
   Tone.Transport.bpm.value = bpm.value;
   const timeKeeperCall = timeKeeper();
+
+
 
   const cymbals = new Tone.Sequence(
     (time, note) => {

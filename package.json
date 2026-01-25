@@ -1,0 +1,26 @@
+{
+  "name": "metalnome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maritzbuchholz/Metronome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/maritzbuchholz/Metronome/issues"
+  },
+  "homepage": "https://github.com/maritzbuchholz/Metronome#readme",
+  "dependencies": {
+    "tone": "^15.1.22",
+    "vite": "^7.3.1"
+  }
+}
