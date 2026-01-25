@@ -1,19 +1,15 @@
 "use strict";
 import * as Tone from "tone";
-import NoSleep from "nosleep.js";
 
 const start = document.querySelector(".metalnome__button");
 const blinker = document.querySelector(".metalnome__blinker");
 
-// 1. Silent Loop (Bypasses Silent Switch)
+// 1. Silent Loop (Bypasses Silent Switch & Keeps App Alive)
 const silentAudio = document.getElementById("silent-audio");
 if (silentAudio) {
-  // Use a tiny silent mp3 or wav. This one works well.
-  silentAudio.src = "data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA==";
+  // Use a proper silent MP3 (approx 0.5s silence). This works better than the tiny WAV.
+  silentAudio.src = "data:audio/mp3;base64,//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAEAAABIADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV6urq6urq6urq6urq6urq6urq6urq6urq6v////////////////////////////////8AAAAATGF2YzU2LjQxAAAAAAAAAAAAAAAAJAAAAAAAAAAAASDs90hvAAAAAAAAAAAAAAAAAAAA//MUZAAAAAGkAAAAAAAAA0gAAAAATEFN//MUZAMAAAGkAAAAAAAAA0gAAAAARTMu//MUZAYAAAGkAAAAAAAAA0gAAAAAOTku//MUZAkAAAGkAAAAAAAAA0gAAAAANVVV";
 }
-
-// 2. NoSleep (Keeps App Awake in Background)
-const noSleep = new NoSleep();
 
 // 1. PRIME AUDIO ON FIRST TOUCH (Global Unlock)
 function primeAudio() {
@@ -58,7 +54,6 @@ function stop() {
   metalnomeOn = false;
   // Disable hacks
   if(silentAudio) silentAudio.pause();
-  noSleep.disable();
   
   Tone.Transport.stop();
   Tone.Transport.cancel();
@@ -321,7 +316,6 @@ start.addEventListener(triggerEvent, (event) => {
   // 1. UNLOCK IMMEDIATELY (Synchronous)
   if (!metalnomeOn) {
       if(silentAudio) silentAudio.play().catch(e => console.log("Audio play failed", e));
-      noSleep.enable();
       Tone.start(); 
   }
 
