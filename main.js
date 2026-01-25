@@ -305,7 +305,7 @@ function faceripper() {
 
 
 let metalnomeOn = false;
-start.addEventListener(triggerEvent, async (event) => {
+start.addEventListener(triggerEvent, (event) => {
   event.preventDefault();
   
   const selectedGroove = document.querySelector(".metalnome__groove").value;
@@ -315,8 +315,7 @@ start.addEventListener(triggerEvent, async (event) => {
       unlockiOS();
   }
 
-  // 2. THEN wait for async setup
-  await Tone.start(); 
+  // 2. Proceed without awaiting (Tone.start is handled by unlockiOS resume)
   
   metalnomeOn = !metalnomeOn;
   if (metalnomeOn) {
